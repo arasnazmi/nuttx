@@ -33,3 +33,4 @@ CHIP_CSRCS += am67_timer.c
 ifeq ($(CONFIG_RPTUN),y)
 CHIP_CSRCS += am67_rptun.c
 endif
+CHIP_CSRCS += am67_rat.c
