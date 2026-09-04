@@ -22,6 +22,11 @@
 
 set(SRCS am67_bringup.c am67_appinit.c)
 
+if(CONFIG_AM67_MCSPI0)
+  list(APPEND SRCS am67_spi.c)
+  target_include_directories(board PRIVATE ${NUTTX_DIR}/arch/arm/src/am67)
+endif()
+
 set_property(GLOBAL PROPERTY LD_SCRIPT "${NUTTX_BOARD_DIR}/scripts/sdram.ld")
 
 target_sources(board PRIVATE ${SRCS})

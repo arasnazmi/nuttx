@@ -23,6 +23,14 @@
 set(SRCS am67_boot.c am67_irq.c am67_mpuinit.c am67_pinmux.c am67_serial.c
          am67_timer.c)
 
+if(CONFIG_AM67_GPIO)
+  list(APPEND SRCS am67_gpio.c)
+endif()
+
+if(CONFIG_AM67_MCSPI0)
+  list(APPEND SRCS am67_mcspi.c)
+endif()
+
 target_link_options(nuttx PRIVATE -Wl,--entry=_vector_start)
 
 target_sources(arch PRIVATE ${SRCS})
