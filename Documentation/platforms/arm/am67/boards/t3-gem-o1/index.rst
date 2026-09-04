@@ -76,9 +76,11 @@ Features
 
 .. warning::
 
-   This board currently only supports a basic implementation of NuttX with
-   only UART console as a supported peripheral. Please see the contributing
-   documentation if you would like to help contribute to the support.
+   NuttX runs on the main-domain R5F core, loaded by U-Boot or Linux via
+   RemoteProc. It relies on the bootloader / Linux Device Manager to have
+   powered and clocked the peripherals it uses (NuttX does not yet run a TISCI
+   client of its own). Support is a work in progress -- please see the
+   contributing documentation if you would like to help.
 
 Serial console
 ==============
@@ -88,6 +90,28 @@ HAT:
 
 - **UART-MAIN1 TX:** GPIO-14
 - **UART-MAIN1 RX:** GPIO-15
+
+SPI
+===
+
+The MCU domain SPI master (:code:`MCU_MCSPI0`) is available and is used by the
+onboard sensors. It is enabled with :code:`CONFIG_AM67_MCSPI0` and registers
+:code:`/dev/spi0` when :code:`CONFIG_SPI_DRIVER` is selected.
+
+The driver is polled, so no interrupt is claimed for the peripheral. Its
+functional clock is described by :code:`CONFIG_AM67_MCSPI0_FCLK` and defaults
+to 48 MHz, matching the clock that the SoC bootloader programs.
+
+Chip selects are driven as GPIOs through the padconfig registers by the
+:code:`CONFIG_AM67_GPIO` driver, following the assignment used by the Linux
+device tree for this board:
+
+============  ===============  ==========================================
+Chip select   SPI device id    Peripheral
+============  ===============  ==========================================
+CS1           SPIDEV_USER(1)   LPS22DF barometer
+CS3           SPIDEV_USER(3)   ICM-20948 IMU (accel, gyro, compass)
+============  ===============  ==========================================
 
 Installation
 ============
