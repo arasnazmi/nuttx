@@ -40,7 +40,7 @@ Features
 
 - **Sensors**
    - InvenSense ICM-20948 IMU (accel, gyro, compass)
-   - Bosch BMP390 barometer
+   - ST LPS22DF barometer
    - TI HDC2010 humidity and temperature
 
 - **Storage**
