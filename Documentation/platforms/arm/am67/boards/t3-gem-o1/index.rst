@@ -113,6 +113,21 @@ CS1           SPIDEV_USER(1)   LPS22DF barometer
 CS3           SPIDEV_USER(3)   ICM-20948 IMU (accel, gyro, compass)
 ============  ===============  ==========================================
 
+I2C
+===
+
+Two I2C masters are available: :code:`MCU_I2C0` (:code:`CONFIG_AM67_I2C0`,
+registered as :code:`/dev/i2c0`) and :code:`WKUP_I2C0`
+(:code:`CONFIG_AM67_WKUP_I2C0`, registered as :code:`/dev/i2c2`).  Both are
+selected under :code:`CONFIG_AM67_I2C` and appear as character devices when
+:code:`CONFIG_I2C_DRIVER` is enabled.
+
+The driver sequences transfers on the ARDY flag, supports repeated start and
+recovers the bus after a NACK.  A bus is brought up on its first transfer, so
+enabling an instance that nothing uses costs nothing at run time.
+
+On this board the onboard RTC and EEPROM sit on :code:`WKUP_I2C0`.
+
 Installation
 ============
 
