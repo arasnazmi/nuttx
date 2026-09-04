@@ -13,6 +13,36 @@ config AM67_GPIO
 		GPIO through the padconfig registers (LED, IMU_EN and the
 		SPI chip selects).
 
+config AM67_ECAP0
+	bool "AM67 eCAP0 APWM driver"
+	default n
+	depends on PWM
+	---help---
+		Enable the eCAP0 module as a single-channel Auxiliary PWM
+		(APWM) output.  Registered as /dev/ecap0 (kept out of the
+		/dev/pwmN namespace, which belongs to the EPWM instances).
+		No output pad is assigned on t3-gem-o1: ball C20 is left with
+		EPWM0_B, so the module runs but drives no pin.
+
+config AM67_ECAP1
+	bool "AM67 eCAP1 APWM driver"
+	default n
+	depends on PWM
+	---help---
+		Enable the eCAP1 module as a single-channel APWM output,
+		registered as /dev/ecap1.  The output is driven on MCASP0_AXR3
+		(mode 5); see am67_pinmux.c.
+
+config AM67_ECAP2
+	bool "AM67 eCAP2 APWM driver"
+	default n
+	depends on PWM
+	---help---
+		Enable the eCAP2 module as a single-channel APWM output,
+		registered as /dev/ecap2.  The output is driven on MCASP0_ACLKX
+		(mode 2); see am67_pinmux.c.
+
+
 config AM67_MCSPI0
 	bool "AM67 MCU_MCSPI0 master driver"
 	default n

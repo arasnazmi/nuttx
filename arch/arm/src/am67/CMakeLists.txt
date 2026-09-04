@@ -31,6 +31,12 @@ if(CONFIG_AM67_MCSPI0)
   list(APPEND SRCS am67_mcspi.c)
 endif()
 
+if(CONFIG_AM67_ECAP0
+   OR CONFIG_AM67_ECAP1
+   OR CONFIG_AM67_ECAP2)
+  list(APPEND SRCS am67_ecap.c)
+endif()
+
 target_link_options(nuttx PRIVATE -Wl,--entry=_vector_start)
 
 target_sources(arch PRIVATE ${SRCS})
