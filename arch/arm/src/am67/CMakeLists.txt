@@ -31,6 +31,10 @@ if(CONFIG_AM67_MCSPI0)
   list(APPEND SRCS am67_mcspi.c)
 endif()
 
+if(CONFIG_AM67_I2C)
+  list(APPEND SRCS am67_i2c.c)
+endif()
+
 target_link_options(nuttx PRIVATE -Wl,--entry=_vector_start)
 
 target_sources(arch PRIVATE ${SRCS})

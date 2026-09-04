@@ -27,6 +27,11 @@ if(CONFIG_AM67_MCSPI0)
   target_include_directories(board PRIVATE ${NUTTX_DIR}/arch/arm/src/am67)
 endif()
 
+if(CONFIG_AM67_I2C)
+  list(APPEND SRCS am67_i2c.c)
+  target_include_directories(board PRIVATE ${NUTTX_DIR}/arch/arm/src/am67)
+endif()
+
 set_property(GLOBAL PROPERTY LD_SCRIPT "${NUTTX_BOARD_DIR}/scripts/sdram.ld")
 
 target_sources(board PRIVATE ${SRCS})
