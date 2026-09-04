@@ -113,6 +113,17 @@ CS1           SPIDEV_USER(1)   LPS22DF barometer
 CS3           SPIDEV_USER(3)   ICM-20948 IMU (accel, gyro, compass)
 ============  ===============  ==========================================
 
+eCAP
+====
+
+The eCAP modules can run in APWM mode and are exposed as PWM lower halves,
+selected with :code:`CONFIG_AM67_ECAP0`, :code:`CONFIG_AM67_ECAP1` and
+:code:`CONFIG_AM67_ECAP2`.  They register as :code:`/dev/ecapN` rather than
+:code:`/dev/pwmN`, which belongs to the EPWM instances.
+
+eCAP1 drives MCASP0_AXR3 and eCAP2 drives MCASP0_ACLKX.  eCAP0 has no pad
+assigned on this board, because ball C20 is left with EPWM0_B.
+
 Installation
 ============
 
