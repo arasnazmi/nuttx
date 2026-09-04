@@ -113,6 +113,16 @@ CS1           SPIDEV_USER(1)   LPS22DF barometer
 CS3           SPIDEV_USER(3)   ICM-20948 IMU (accel, gyro, compass)
 ============  ===============  ==========================================
 
+PWM
+===
+
+The EPWM0 and EPWM1 instances are available as PWM lower halves, selected
+with :code:`CONFIG_AM67_EPWM0` and :code:`CONFIG_AM67_EPWM1`, and registered
+as :code:`/dev/pwm0` and :code:`/dev/pwm1`.
+
+Each instance drives its A and B outputs as separate channels, so the
+configuration needs :code:`CONFIG_PWM_NCHANNELS` set to at least 2.
+
 Installation
 ============
 
